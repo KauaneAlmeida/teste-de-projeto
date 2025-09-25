@@ -7,9 +7,9 @@ Manages two distinct WhatsApp lead flows:
 """
 
 import logging
+import urllib.parse
 from typing import Dict, Any, Optional
 from datetime import datetime, timezone
-import urllib.parse
 
 from app.services.baileys_service import baileys_service
 from app.services.lead_assignment_service import lead_assignment_service
