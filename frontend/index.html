@@ -198,20 +198,8 @@
 
     window.addEventListener('load', async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/conversation/start`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' }
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.session_id) {
-            localStorage.setItem('chat_session_id', data.session_id);
-          }
-          if (data.question) {
-            addMessage(data.question, 'bot');
-          }
-        }
+        // Não iniciar automaticamente - aguardar primeira mensagem do usuário
+        console.log('Chat carregado - aguardando primeira mensagem do usuário');
       } catch (err) {
         console.error('Failed to initialize conversation:', err);
       }

@@ -53,6 +53,32 @@ class IntelligentHybridOrchestrator:
             if not session_data:
                 session_data = await self._create_new_session(session_id, platform)
 
+            # Verificar se é uma mensagem de saudação inicial
+            greeting_messages = ["olá", "ola", "oi", "hello", "hi", "bom dia", "boa tarde", "boa noite"]
+            is_greeting = message.lower().strip() in greeting_messages
+            
+            # Se é saudação e não tem dados ainda, iniciar fluxo
+            if is_greeting and not session_data.get("lead_data"):
+                flow = await get_conversation_flow()
+                steps = flow.get("steps", [])
+                first_step = next((s for s in steps if s["id"] == 1), None)
+                
+                if first_step:
+                    session_data.update({
+                        "current_step": 1,
+                        "message_count": 1,
+                        "lead_data": {},
+                        "last_updated": datetime.now()
+                    })
+                    await save_user_session(session_id, session_data)
+                    
+                    return {
+                        "response": first_step["question"],
+                        "response_type": "structured_question",
+                        "session_id": session_id,
+                        "current_step": 1,
+                        "flow_completed": False
+                    }
             # Verificar se está coletando telefone
             if session_data.get("collecting_phone"):
                 return await self._handle_phone_collection(message, session_id, session_data)
@@ -113,8 +139,8 @@ class IntelligentHybridOrchestrator:
             
             logger.info(f"📋 Fluxo estruturado | step={current_step} | total_steps={len(steps)} | msg_count={message_count}")
 
-            # Se é a primeira mensagem, mostrar primeira pergunta
-            if message_count == 1:
+            # Se é a primeira mensagem (saudação inicial), mostrar primeira pergunta
+            if message_count == 1 and message.lower().strip() in ["olá", "ola", "oi", "hello", "hi"]:
                 first_step = next((s for s in steps if s["id"] == 1), None)
                 if first_step:
                     session_data.update({

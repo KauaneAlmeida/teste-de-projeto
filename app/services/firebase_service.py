@@ -89,26 +89,26 @@ async def get_conversation_flow() -> Dict[str, Any]:
                 "steps": [
                     {
                         "id": 1, 
-                        "question": "Olá! Seja bem-vindo ao m.lima. Estou aqui para entender seu caso e agilizar o contato com um de nossos advogados especializados.\n\nPara começar, qual é o seu nome completo?"
+                        "question": "Olá! Seja bem-vindo ao m.lima. Estou aqui para entender seu caso e agilizar o contato com nossos advogados especializados.\n\nPara começar, qual é o seu nome completo?"
                     },
                     {
                         "id": 2, 
-                        "question": "Prazer em conhecê-lo, {user_name}! Agora preciso de algumas informações de contato:\n\n📱 Qual o melhor telefone/WhatsApp para contato?\n📧 Você poderia informar seu e-mail também?"
+                        "question": "Prazer, {user_name}! Preciso do seu telefone/WhatsApp e e-mail para contato:"
                     },
                     {
                         "id": 3, 
-                        "question": "Perfeito, {user_name}! Com qual área do direito você precisa de ajuda?\n\n• Penal\n• Saúde (ações e liminares médicas)"
+                        "question": "Perfeito! Com qual área do direito você precisa de ajuda?\n\n• Penal\n• Saúde (ações e liminares médicas)"
                     },
                     {
                         "id": 4, 
-                        "question": "Entendi, {user_name}. Me diga de forma breve sobre sua situação em {area}:\n\n• O caso já está em andamento na justiça ou é uma situação inicial?\n• Existe algum prazo ou audiência marcada?\n• Em qual cidade ocorreu/está ocorrendo?"
+                        "question": "Me conte brevemente sobre sua situação:\n\n• O caso já está em andamento?\n• Há prazos ou audiências?\n• Em qual cidade?"
                     },
                     {
                         "id": 5, 
-                        "question": "Obrigado por compartilhar, {user_name}. Casos como o seu em {area} exigem atenção imediata para evitar complicações.\n\nNossos advogados já atuaram em dezenas de casos semelhantes com ótimos resultados. Vou registrar os principais pontos para que o advogado responsável já entenda sua situação e agilize a solução.\n\nEm instantes você será direcionado para um de nossos especialistas. Está tudo certo?"
+                        "question": "Casos assim precisam de atenção imediata. Nossos advogados têm experiência em casos semelhantes.\n\nPosso direcioná-lo para nosso especialista?"
                     }
                 ],
-                "completion_message": "Perfeito, {user_name}! Um de nossos advogados especialistas em {area} já vai assumir seu atendimento em instantes.\n\nEnquanto isso, fique tranquilo - você está em boas mãos! 🤝\n\nSuas informações foram registradas e o advogado já terá todo o contexto do seu caso.",
+                "completion_message": "Perfeito! Nossa equipe do m.lima entrará em contato em breve.",
                 "created_at": datetime.now(),
                 "updated_at": datetime.now(),
                 "version": "2.0_novo_fluxo",
@@ -143,7 +143,7 @@ async def get_conversation_flow() -> Dict[str, Any]:
             normalized_steps = [
                 {
                     "id": 1,
-                    "question": "Olá! Seja bem-vindo ao m.lima. Para começar, qual é o seu nome completo?"
+                    "question": "Para começar, qual é o seu nome completo?"
                 },
                 {
                     "id": 2,
